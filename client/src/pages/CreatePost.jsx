@@ -16,12 +16,20 @@ const CreatePost = () => {
   const [loading, setLoading] = useState(false);
 
   const generateImage = () => {};
+
   const handleSubmit = () => {};
-  const handleSurpriseMe = () => {};
-  const handleChange = (e) => {};
+
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   return (
-    <section className="max-w-7xl mx-auto">
+    <section className="mx-auto max-w-7xl">
       <div>
         <h1 className="font-extrabold text-[#222328] text-[32px]">Create</h1>
         <p className="mt-2 text-[#666e75] text-[16px] max-w-[500px]">
@@ -30,7 +38,7 @@ const CreatePost = () => {
         </p>
       </div>
 
-      <form action="" className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
+      <form action="" className="max-w-3xl mt-16" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
             labelName="Your name"
@@ -50,18 +58,18 @@ const CreatePost = () => {
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
           />
-          <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
+          <div className="relative flex items-center justify-center w-64 h-64 p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
             {form.photo ? (
               <img
                 src={form.photo}
                 alt={form.prompt}
-                className="w-full h-full object-contain"
+                className="object-contain w-full h-full"
               />
             ) : (
               <img
                 src={preview}
                 alt="preview"
-                className="w-9/12 h-9/12 object-contain opacity-40"
+                className="object-contain w-9/12 h-9/12 opacity-40"
               />
             )}
 
@@ -73,7 +81,7 @@ const CreatePost = () => {
           </div>
         </div>
 
-        <div className="mt-5 flex gap-5">
+        <div className="flex gap-5 mt-5">
           <button
             type="button"
             onClick={generateImage}
